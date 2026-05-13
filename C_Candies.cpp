@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+template <typename T>
+using ordered_set = tree<T, null_type, greater_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
+using ll = long long;
+#define endl '\n'
+#define all(x) (x).begin(), (x).end()
+#define sz(x) (ll)(x).size()
+#define f0(i, n) for(ll i = 0; i < n; i++)
+#define f1(i, n) for(ll i = 1; i <= n; i++)
+#define testcase ll t; cin >> t; while(t--)
+#define testcase1 ll t; t = 1; while(t--)
+ll n;
+bool ok(ll k)
+{
+    ll x = n;
+    ll v = 0;
+    while(x > 0)
+    {
+        ll nise = min(k, x);
+        v += nise;
+        x -= nise;
+        x -= x / 10;
+    }
+    return v * 2 >= n;
+}
+void solve()
+{
+    cin >> n;
+    ll l = 1, h = n, ans = n;
+    while(l <= h)
+    {
+        ll mid = (l + h) / 2;
+        if(ok(mid))
+        {
+            ans = mid;
+            h = mid - 1;
+        }
+        else
+        {
+            l = mid + 1;
+        }
+    }
+    cout << ans << endl;
+}
+int32_t main()
+{
+    ios_base :: sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    testcase1
+    {
+        solve();
+    }
+    return 0;
+}
